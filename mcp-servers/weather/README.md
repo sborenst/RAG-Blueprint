@@ -85,4 +85,48 @@ python test-weather.py
 ```
 
 
+## Running in a container: 
 
+
+You can create a container to run this MCP server
+
+### Build from `Containerfile`
+
+```
+git clone https://github.com/RHEcosystemAppEng/RAG-Blueprint
+
+# with Podman;
+
+podman build RAG-Blueprint/mcp-servers/weather -t mcp-weather:0.1
+
+# with Docker
+
+docker build RAG-Blueprint/mcp-servers/weather -t mcp-weather:0.1
+
+```
+
+### Run the contaienr
+
+If you wanted to specify the port, you can do that in your docker or podman command:
+
+```
+CONTAINER_NAME=mcp-weather
+CONTAINER_IMAGE="mcp-weather:0.2"
+
+docker run -d \
+--name $CONTAINER_NAME \
+--network=host \
+$CONTAINER_IMAGE \
+--port 8005  
+
+
+CONTAINER_NAME=mcp-weather
+CONTAINER_IMAGE="mcp-weather:0.2"
+
+podman run -d \
+--name $CONTAINER_NAME \
+--network=host \
+$CONTAINER_IMAGE \
+--port 8005  
+
+```
